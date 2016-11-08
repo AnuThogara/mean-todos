@@ -1,6 +1,10 @@
 var express = require('express');
 var server = express();
 var todoRouter = require('./server/routers/todo.router.js');
+var mongoURI = process.env.MONGOURI || require('./config.js').mongoURI;
+var mongoose = require('mongoose');
+
+mongoose.connect(mongoURI);
 
 var port = process.env.PORT || 8080;
 
