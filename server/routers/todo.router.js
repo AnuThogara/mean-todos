@@ -10,7 +10,7 @@ router.use(bodyParser.urlencoded({
 
 router.get('/todos', function(req, res) {
   //get from DB to router , mongoose gets this from model
-  Todo.find({}, function(err, foundTodos){
+  Todo.findSimilarTypes({description: req.params.description}, function(err, foundTodos){
     if(err){
       res.status(500).json({
         err: err
@@ -22,8 +22,8 @@ router.get('/todos', function(req, res) {
   });
 
 });
-router.get('/todos/:id', function(req, res) {
-  Todo.find({_id: req.params.id},  function(err,foundTodo){
+router.get('/todos/description', function(req, res) {
+  Todo.find({description: req.params.description},  function(err,foundTodo){
     if(err){
       res.status(500).json({
         err: err
