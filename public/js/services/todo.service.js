@@ -28,7 +28,7 @@
       return todos;
     }
     function createOneTodo(todo){
-      DEBUGGER();
+
       $http.post('./todos', todo)
          .then(function(response){
            todos.push(todo);
@@ -37,7 +37,15 @@
            console.log(err);
          });
     }
-    function updateOneTodo(index, todo){}
+    function updateOneTodo(index, updatedTodo){
+      $http.put('/todos/' + updatedTodo._id, updatedTodo)
+            .then(function(){
+              todos.splice(index, 1, updatedTodo);
+            })
+            .catch(function(err){
+              console.log(err);
+            });
+    }
     function deleteOneTodo(index){}
   }
 }());
